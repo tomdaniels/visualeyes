@@ -5,9 +5,8 @@ export const grid = css`
   justify-content: center;
 `;
 
-export const element = (height, position) => css`
-  order: ${position};
-  height: ${height * 100}px;
+export const element = (height) => css`
+  height: ${height}px;
   border: 1px solid red;
   margin: 0 10px;
 `;
