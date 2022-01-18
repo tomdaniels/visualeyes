@@ -13,9 +13,7 @@ export default function ArrayVisualiser({
 }: Props): ReactElement {
   return (
     <>
-      <button onClick={() => handleClick(array)}>
-        {array[0] === 1 ? 'sorted' : 'sort'}
-      </button>
+      <button onClick={() => handleClick(array)}>sort!</button>
       <div css={styles.grid}>
         {array.map((elem, idx) => (
           <div id={`${idx}`} key={idx} css={styles.element(elem, idx)}>
