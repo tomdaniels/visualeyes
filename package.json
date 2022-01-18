@@ -8,14 +8,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/css": "^11.7.1",
+    "@emotion/react": "^11.7.1",
     "next": "12.0.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-dom-server": "^0.0.5"
   },
   "devDependencies": {
     "@types/node": "17.0.9",
     "@types/react": "17.0.38",
+    "@types/react-dom": "^17.0.11",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
     "typescript": "4.5.4"
