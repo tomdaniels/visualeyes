@@ -27,11 +27,9 @@ export default function ArrayVisualiser(): ReactElement {
   function handleClick(array: number[]) {
     const result = mergeSort(array);
 
-    for (let i = 0; i < array.length; i++) {
-      setTimeout(() => {
-        console.log(result);
-      }, 350 * i);
-    }
+   result.animations.forEach(animation => {
+     console.log('to animate', animation.pair, animation.committed);
+   })
   }
 
   return (
