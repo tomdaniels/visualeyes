@@ -37,7 +37,7 @@ export default function ArrayVisualiser(): ReactElement {
       <button onClick={() => handleClick(array)}>sort!</button>
       <div css={styles.grid}>
         {array.map((elem, idx) => (
-          <div id={`${idx}`} key={idx} css={styles.element(elem)}>
+          <div id={`${elem}`} key={idx} css={styles.element(elem)}>
             {elem}
           </div>
         ))}
