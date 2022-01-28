@@ -1,13 +1,13 @@
 type AnimationTracker = {
-  pair?: number[];
-  committed?: number[];
-  overflow?: number[];
-}
+  pair: number[];
+  committed: number[];
+  overflow: number[];
+};
 
 type AnimatedMergeSort = {
-  arr: number[];
   animations: AnimationTracker[];
-}
+  arr: number[];
+};
 
 export default function mergeSort(arr: number[]): AnimatedMergeSort {
   const animations: AnimationTracker[] = [];
@@ -20,25 +20,25 @@ export default function mergeSort(arr: number[]): AnimatedMergeSort {
     let i = 0;
     let j = 0;
 
-    const toAnimate: AnimationTracker = {
+    const toAnimate: Omit<AnimationTracker, 'build'> = {
       pair: [],
       committed: [],
       overflow: [],
-    }
-  
+    };
+
     while (i < first.length && j < second.length) {
       toAnimate.pair?.push(first[i], second[j]);
       if (first[i] < second[j]) {
-        toAnimate.committed?.push(i, first[i]);
+        toAnimate.committed?.push(first[i], second[j]);
         merged.push(first[i]);
         i++;
       } else {
-        toAnimate.committed?.push(j, second[j]);
+        toAnimate.committed?.push(second[j], first[i]);
         merged.push(second[j]);
         j++;
       }
     }
-  
+
     while (i < first.length) {
       toAnimate.overflow?.push(first[i]);
       merged.push(first[i]);
@@ -52,7 +52,7 @@ export default function mergeSort(arr: number[]): AnimatedMergeSort {
     animations.push(toAnimate);
     return merged;
   }
-  
+
   function sort(arr: number[]): number[] {
     if (arr.length <= 1) return arr;
     const mid = Math.floor(arr.length / 2);
@@ -65,7 +65,7 @@ export default function mergeSort(arr: number[]): AnimatedMergeSort {
   return {
     arr: result,
     animations,
-  }
+  };
 }
 
 // console.log(merge([1,3,4,8], [2, 5, 6, 7, 9]));
