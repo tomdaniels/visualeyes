@@ -46,10 +46,9 @@ export default function ArrayVisualiser(): ReactElement {
     setIsSorted(true);
   }
 
-  function handleSlider(e: EventTarget & HTMLInputElement) {
-    const count = parseInt(e.value);
-    setNumberOfBars(count);
-    resetArray(count);
+  function handleSlider(newCount: number) {
+    setNumberOfBars(newCount);
+    resetArray(newCount);
   }
 
   return (
