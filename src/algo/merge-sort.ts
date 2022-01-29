@@ -1,72 +1,63 @@
-type AnimationTracker = {
-  pair: number[];
-  committed: number[];
-  overflow: number[];
-};
-
-type AnimatedMergeSort = {
-  animations: AnimationTracker[];
-  arr: number[];
-};
-
-export default function mergeSort(arr: number[]): AnimatedMergeSort {
-  const animations: AnimationTracker[] = [];
-
-  /**
-   * merge two sorted arrays
-   */
-  function merge(first: number[], second: number[]): number[] {
-    const merged = [];
-    let i = 0;
-    let j = 0;
-
-    const toAnimate: Omit<AnimationTracker, 'build'> = {
-      pair: [],
-      committed: [],
-      overflow: [],
-    };
-
-    while (i < first.length && j < second.length) {
-      toAnimate.pair?.push(first[i], second[j]);
-      if (first[i] < second[j]) {
-        toAnimate.committed?.push(first[i], second[j]);
-        merged.push(first[i]);
-        i++;
-      } else {
-        toAnimate.committed?.push(second[j], first[i]);
-        merged.push(second[j]);
-        j++;
-      }
-    }
-
-    while (i < first.length) {
-      toAnimate.overflow?.push(first[i]);
-      merged.push(first[i]);
-      i++;
-    }
-    while (j < second.length) {
-      toAnimate.overflow?.push(second[j]);
-      merged.push(second[j]);
-      j++;
-    }
-    animations.push(toAnimate);
-    return merged;
-  }
-
-  function sort(arr: number[]): number[] {
-    if (arr.length <= 1) return arr;
-    const mid = Math.floor(arr.length / 2);
-    const group1 = sort(arr.slice(0, mid));
-    const group2 = sort(arr.slice(mid));
-    return merge(group1, group2);
-  }
-
-  const result = sort(arr);
-  return {
-    arr: result,
-    animations,
-  };
+export default function getMergeSortAnimations(array: number[]): any {
+  const animations: [number, number][] = [];
+  if (array.length <= 1) return array;
+  const auxiliaryArray = array.slice();
+  mergeSort(array, 0, array.length - 1, auxiliaryArray, animations);
+  return animations;
 }
 
-// console.log(merge([1,3,4,8], [2, 5, 6, 7, 9]));
-// console.log(mergeSort([9,2,3,5,4,6]));
+function mergeSort(
+  arr: number[],
+  startIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: [number, number][]
+): void {
+  if (startIdx === endIdx) return;
+  const mid = Math.floor((startIdx + endIdx) / 2);
+  mergeSort(auxiliaryArray, startIdx, mid, arr, animations);
+  mergeSort(auxiliaryArray, mid + 1, endIdx, arr, animations);
+  merge(arr, startIdx, mid, endIdx, auxiliaryArray, animations);
+}
+
+function merge(
+  arr: number[],
+  startIdx: number,
+  midIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: [number, number][]
+): void {
+  let k = startIdx;
+  let i = startIdx;
+  let j = midIdx + 1;
+
+  while (i <= midIdx && j <= endIdx) {
+    // push values twice to toggle colour
+    animations.push([i, j]);
+    animations.push([i, j]);
+    if (auxiliaryArray[i] <= auxiliaryArray[j]) {
+      // push the index number and new value at that index
+      animations.push([k, auxiliaryArray[i]]);
+      arr[k++] = auxiliaryArray[i++]; // inplace swap
+    } else {
+      animations.push([k, auxiliaryArray[j]]);
+      arr[k++] = auxiliaryArray[j++];
+    }
+  }
+
+  while (i <= midIdx) {
+    // push twice to toggle colours
+    animations.push([i, i]);
+    animations.push([i, i]);
+    animations.push([k, auxiliaryArray[i]]);
+    arr[k++] = auxiliaryArray[i++];
+  }
+  while (j <= endIdx) {
+    // push twice to toggle colours
+    animations.push([j, j]);
+    animations.push([j, j]);
+    animations.push([k, auxiliaryArray[j]]);
+    arr[k++] = auxiliaryArray[j++];
+  }
+}
