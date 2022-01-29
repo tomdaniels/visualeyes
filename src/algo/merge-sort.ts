@@ -1,4 +1,38 @@
-export default function getMergeSortAnimations(array: number[]): any {
+export default function animate(
+  arr: number[],
+  primaryColour: string,
+  secondaryColour: string,
+  animationSpeed: number
+): void {
+  const animations = getMergeSortAnimations(arr);
+
+  for (let i = 0; i < animations.length; i++) {
+    const arrayBars = Array.from(
+      document.getElementsByClassName(
+        'array-bar'
+      ) as HTMLCollectionOf<HTMLElement>
+    );
+    const isColorChange = i % 3 !== 2;
+    if (isColorChange) {
+      const [barOneIdx, barTwoIdx] = animations[i];
+      const barOneStyle = arrayBars[barOneIdx].style;
+      const barTwoStyle = arrayBars[barTwoIdx].style;
+      const color = i % 3 === 0 ? secondaryColour : primaryColour;
+      setTimeout(() => {
+        barOneStyle.backgroundColor = color;
+        barTwoStyle.backgroundColor = color;
+      }, i * animationSpeed);
+    } else {
+      setTimeout(() => {
+        const [barOneIdx, newHeight] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        barOneStyle.height = `${newHeight}px`;
+      }, i * animationSpeed);
+    }
+  }
+}
+
+function getMergeSortAnimations(array: number[]): any {
   const animations: [number, number][] = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
