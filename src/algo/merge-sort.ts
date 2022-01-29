@@ -36,7 +36,7 @@ function getMergeSortAnimations(array: number[]): any {
   const animations: [number, number][] = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
-  mergeSort(array, 0, array.length - 1, auxiliaryArray, animations);
+  mergeSort(array.slice(), 0, array.length - 1, auxiliaryArray, animations);
   return animations;
 }
 
