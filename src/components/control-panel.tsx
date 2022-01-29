@@ -10,7 +10,7 @@ interface ControlPanelProps {
   array: number[];
 }
 
-export const ControlPanel: React.FC<ControlPanelProps> = ({
+const ControlPanel: React.FC<ControlPanelProps> = ({
   onReset,
   handleSliderChange,
   handleSortClick,
@@ -37,3 +37,5 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
     </div>
   );
 };
+
+export default ControlPanel;

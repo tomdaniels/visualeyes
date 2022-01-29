@@ -1,10 +1,10 @@
 import { ReactElement, useState, useEffect, useCallback } from 'react';
-import randomIntBetween from 'src/utils/random-int-between';
-import animateMergeSort from 'src/algo/merge-sort';
-import clearNodeStyles from 'src/utils/clear-node-styles';
+import ControlPanel from './control-panel';
+import randomIntBetween from '../utils/random-int-between';
+import animateMergeSort from '../algo/merge-sort';
+import clearNodeStyles from '../utils/clear-node-styles';
 
 import * as styles from '../styles/array-visualiser.style';
-import { ControlPanel } from './control-panel';
 
 const PRIMARY_COLOR = 'pink';
 const SECONDARY_COLOR = 'yellow';
