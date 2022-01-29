@@ -12,11 +12,6 @@ export const buttonGroup = css`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-  div {
-    margin-right: 5px;
-  }
 
   button {
     margin: 15px 5px;
