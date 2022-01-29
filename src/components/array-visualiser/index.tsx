@@ -11,10 +11,11 @@ const NUMBER_OF_ARRAY_BARS = 125;
 const ANIMATION_SPEED_MS = 10;
 
 export default function ArrayVisualiser(): ReactElement {
-  const [arrayBars, setArrayBars] = useState<number>(NUMBER_OF_ARRAY_BARS);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [isSorted, setIsSorted] = useState<boolean>(false);
   const [array, setArray] = useState<number[]>([]);
+  const [numberOfBars, setNumberOfBars] =
+    useState<number>(NUMBER_OF_ARRAY_BARS);
 
   const resetArray = useCallback(
     (length: number = 0): void => {
@@ -23,13 +24,13 @@ export default function ArrayVisualiser(): ReactElement {
       }
 
       const newArray = [];
-      for (let i = 0; i < (length !== 0 ? length : arrayBars); i++) {
+      for (let i = 0; i < (length !== 0 ? length : numberOfBars); i++) {
         newArray.push(randomIntBetween(20, 1000));
       }
       setIsSorted(false);
       setArray(newArray);
     },
-    [arrayBars, isSorted]
+    [numberOfBars, isSorted]
   );
 
   useEffect(() => {
@@ -48,8 +49,10 @@ export default function ArrayVisualiser(): ReactElement {
     setIsSorted(true);
   }
 
-  function handleSlider(e: any) {
-    setArrayBars(parseInt(e.target.value));
+  function handleSlider(e: EventTarget & HTMLInputElement) {
+    const count = parseInt(e.value);
+    setNumberOfBars(count);
+    resetArray(count);
   }
 
   return (
@@ -60,14 +63,9 @@ export default function ArrayVisualiser(): ReactElement {
           <input
             type="range"
             min={15}
-            value={arrayBars}
+            value={numberOfBars}
             max={200}
-            onChange={(e) => handleSlider(e)}
-            onMouseUp={(e) =>
-              resetArray(
-                parseInt((e.target as EventTarget & HTMLInputElement).value)
-              )
-            }
+            onChange={(e) => handleSlider(e.target)}
           />
         </div>
         <div>
@@ -79,16 +77,16 @@ export default function ArrayVisualiser(): ReactElement {
       <div css={styles.grid}>
         {array.map((value, idx) => (
           <div
+            key={idx}
             className="array-bar"
             css={styles.element(
               value,
-              arrayBars <= 20
-                ? arrayBars * 10
-                : arrayBars <= 50
-                ? arrayBars * 5
-                : arrayBars / 2
+              numberOfBars <= 20
+                ? numberOfBars * 10
+                : numberOfBars <= 50
+                ? numberOfBars * 5
+                : numberOfBars / 2
             )}
-            key={idx}
           />
         ))}
       </div>
