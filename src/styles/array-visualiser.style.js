@@ -12,14 +12,19 @@ export const buttonGroup = css`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  div {
+    margin-right: 5px;
+  }
 
   button {
     margin: 15px 5px;
   }
 `;
 
-export const element = (height) => css`
-  width: 10px;
+export const element = (height, width) => css`
+  width: ${width}px;
   height: ${height}px;
   border: 1px solid pink;
   margin: 0 1px;
