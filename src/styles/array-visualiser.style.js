@@ -6,7 +6,8 @@ export const grid = css`
 `;
 
 export const element = (height) => css`
+  width: 10px;
   height: ${height}px;
-  border: 1px solid red;
-  margin: 0 10px;
+  border: 1px solid pink;
+  margin: 0 1px;
 `;
