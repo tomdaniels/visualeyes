@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from 'react';
+import { ReactElement, useState, useEffect, useCallback } from 'react';
 import randomIntBetween from 'src/utils/random-int-between';
 import animateMergeSort from 'src/algo/merge-sort';
 import clearNodeStyles from 'src/utils/clear-node-styles';
@@ -14,27 +14,31 @@ export default function ArrayVisualiser(): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [isSorted, setIsSorted] = useState<boolean>(false);
   const [array, setArray] = useState<number[]>([]);
+  const [numberOfBars, setNumberOfBars] =
+    useState<number>(NUMBER_OF_ARRAY_BARS);
+
+  const resetArray = useCallback(
+    (length: number = 0): void => {
+      if (isSorted) {
+        clearNodeStyles('array-bar');
+      }
+
+      const newArray = [];
+      for (let i = 0; i < (length !== 0 ? length : numberOfBars); i++) {
+        newArray.push(randomIntBetween(20, 1000));
+      }
+      setIsSorted(false);
+      setArray(newArray);
+    },
+    [numberOfBars, isSorted]
+  );
 
   useEffect(() => {
     if (!isMounted) {
       setIsMounted(true);
       resetArray();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMounted, array]);
-
-  function resetArray(): void {
-    if (isSorted) {
-      clearNodeStyles('array-bar');
-    }
-
-    const newArray = [];
-    for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      newArray.push(randomIntBetween(20, 1000));
-    }
-    setIsSorted(false);
-    setArray(newArray);
-  }
+  }, [resetArray, isMounted, array]);
 
   function handleClick(array: number[]) {
     if (isSorted) {
@@ -45,10 +49,25 @@ export default function ArrayVisualiser(): ReactElement {
     setIsSorted(true);
   }
 
+  function handleSlider(e: EventTarget & HTMLInputElement) {
+    const count = parseInt(e.value);
+    setNumberOfBars(count);
+    resetArray(count);
+  }
+
   return (
     <>
       <div css={styles.buttonGroup}>
-        <button onClick={() => resetArray()}>generate new array</button>
+        <div>
+          <button onClick={() => resetArray()}>generate new array</button>
+          <input
+            type="range"
+            min={15}
+            value={numberOfBars}
+            max={200}
+            onChange={(e) => handleSlider(e.target)}
+          />
+        </div>
         <div>
           <button onClick={() => handleClick(array)}>merge sort!</button>
           <button disabled>quick sort</button>
@@ -57,7 +76,18 @@ export default function ArrayVisualiser(): ReactElement {
       </div>
       <div css={styles.grid}>
         {array.map((value, idx) => (
-          <div className="array-bar" css={styles.element(value)} key={idx} />
+          <div
+            key={idx}
+            className="array-bar"
+            css={styles.element(
+              value,
+              numberOfBars <= 20
+                ? numberOfBars * 10
+                : numberOfBars <= 50
+                ? numberOfBars * 5
+                : numberOfBars / 2
+            )}
+          />
         ))}
       </div>
     </>
