@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as styles from '../styles/control-panel';
+import * as styles from '../styles/control-panel.style';
 
 interface ControlPanelProps {
   onReset: Function;
