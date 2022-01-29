@@ -1,9 +1,10 @@
-export default function animate(
-  arr: number[],
-  primaryColour: string,
-  secondaryColour: string,
-  animationSpeed: number
-): void {
+import {
+  PRIMARY_COLOUR,
+  SECONDARY_COLOUR,
+  ANIMATION_SPEED_MS,
+} from 'src/constants';
+
+export default function animate(arr: number[]): void {
   const animations = getMergeSortAnimations(arr);
 
   for (let i = 0; i < animations.length; i++) {
@@ -12,22 +13,22 @@ export default function animate(
         'array-bar'
       ) as HTMLCollectionOf<HTMLElement>
     );
-    const isColorChange = i % 3 !== 2;
-    if (isColorChange) {
+    const isColourChange = i % 3 !== 2;
+    if (isColourChange) {
       const [barOneIdx, barTwoIdx] = animations[i];
       const barOneStyle = arrayBars[barOneIdx].style;
       const barTwoStyle = arrayBars[barTwoIdx].style;
-      const color = i % 3 === 0 ? secondaryColour : primaryColour;
+      const colour = i % 3 === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
       setTimeout(() => {
-        barOneStyle.backgroundColor = color;
-        barTwoStyle.backgroundColor = color;
-      }, i * animationSpeed);
+        barOneStyle.backgroundColor = colour;
+        barTwoStyle.backgroundColor = colour;
+      }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
         const [barOneIdx, newHeight] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         barOneStyle.height = `${newHeight}px`;
-      }, i * animationSpeed);
+      }, i * ANIMATION_SPEED_MS);
     }
   }
 }

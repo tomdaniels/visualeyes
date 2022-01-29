@@ -3,13 +3,9 @@ import ControlPanel from './control-panel';
 import randomIntBetween from '../utils/random-int-between';
 import animateMergeSort from '../algo/merge-sort';
 import clearNodeStyles from '../utils/clear-node-styles';
+import { NUMBER_OF_ARRAY_BARS } from '../constants';
 
 import * as styles from '../styles/array-visualiser.style';
-
-const PRIMARY_COLOR = 'pink';
-const SECONDARY_COLOR = 'yellow';
-const NUMBER_OF_ARRAY_BARS = 125;
-const ANIMATION_SPEED_MS = 10;
 
 export default function ArrayVisualiser(): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -46,7 +42,7 @@ export default function ArrayVisualiser(): ReactElement {
       return;
     }
 
-    animateMergeSort(array, PRIMARY_COLOR, SECONDARY_COLOR, ANIMATION_SPEED_MS);
+    animateMergeSort(array);
     setIsSorted(true);
   }
 
