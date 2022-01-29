@@ -36,6 +36,7 @@ export default function ArrayVisualiser(): ReactElement {
       newArray.push(randomIntBetween(20, 1000));
     }
 
+    setIsSorted(false);
     setArray(newArray);
   }
 
