@@ -4,8 +4,8 @@ import animateMergeSort from 'src/algo/merge-sort';
 
 import * as styles from '../../styles/array-visualiser.style';
 
-const PRIMARY_COLOR = 'red';
-const SECONDARY_COLOR = 'black';
+const PRIMARY_COLOR = 'pink';
+const SECONDARY_COLOR = 'yellow';
 const NUMBER_OF_ARRAY_BARS = 125;
 const ANIMATION_SPEED_MS = 10;
 
