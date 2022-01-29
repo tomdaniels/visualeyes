@@ -1,9 +1,10 @@
 import { ReactElement, useState, useEffect, useCallback } from 'react';
-import randomIntBetween from 'src/utils/random-int-between';
-import animateMergeSort from 'src/algo/merge-sort';
-import clearNodeStyles from 'src/utils/clear-node-styles';
+import ControlPanel from './control-panel';
+import randomIntBetween from '../utils/random-int-between';
+import animateMergeSort from '../algo/merge-sort';
+import clearNodeStyles from '../utils/clear-node-styles';
 
-import * as styles from '../../styles/array-visualiser.style';
+import * as styles from '../styles/array-visualiser.style';
 
 const PRIMARY_COLOR = 'pink';
 const SECONDARY_COLOR = 'yellow';
@@ -57,23 +58,13 @@ export default function ArrayVisualiser(): ReactElement {
 
   return (
     <>
-      <div css={styles.buttonGroup}>
-        <div>
-          <button onClick={() => resetArray()}>generate new array</button>
-          <input
-            type="range"
-            min={15}
-            value={numberOfBars}
-            max={200}
-            onChange={(e) => handleSlider(e.target)}
-          />
-        </div>
-        <div>
-          <button onClick={() => handleClick(array)}>merge sort!</button>
-          <button disabled>quick sort</button>
-          <button disabled>insertion sort</button>
-        </div>
-      </div>
+      <ControlPanel
+        onReset={resetArray}
+        handleSliderChange={handleSlider}
+        handleSortClick={handleClick}
+        numberOfBars={numberOfBars}
+        array={array}
+      />
       <div css={styles.grid}>
         {array.map((value, idx) => (
           <div
