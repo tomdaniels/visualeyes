@@ -1,6 +1,7 @@
 import { ReactElement, useState, useEffect } from 'react';
 import randomIntBetween from 'src/utils/random-int-between';
 import animateMergeSort from 'src/algo/merge-sort';
+import clearNodeStyles from 'src/utils/clear-node-styles';
 
 import * as styles from '../../styles/array-visualiser.style';
 
@@ -24,18 +25,13 @@ export default function ArrayVisualiser(): ReactElement {
 
   function resetArray(): void {
     if (isSorted) {
-      const nodes = Array.from(
-        document.getElementsByClassName(
-          'array-bar'
-        ) as HTMLCollectionOf<HTMLElement>
-      );
-      nodes.forEach((elem) => elem.setAttribute('style', ''));
+      clearNodeStyles('array-bar');
     }
+
     const newArray = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
       newArray.push(randomIntBetween(20, 1000));
     }
-
     setIsSorted(false);
     setArray(newArray);
   }
