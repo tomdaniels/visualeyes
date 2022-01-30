@@ -1,14 +1,6 @@
-import React, { useState } from 'react';
-import {
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  Box,
-  Button,
-  Tooltip,
-  Flex,
-} from '@chakra-ui/react';
+import React from 'react';
+import { Box, Button, Flex } from '@chakra-ui/react';
+import Slider from './slider';
 import { THEME, ALGOS } from '../constants';
 
 interface ControlPanelProps {
@@ -26,7 +18,6 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   numberOfBars,
   array,
 }) => {
-  const [showTooltip, setShowTooltip] = useState<boolean>(false);
   return (
     <Box w="90%" m="8px auto 2px">
       <Flex justifyContent="space-between" align="center">
@@ -41,30 +32,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
             generate new array
           </Button>
           <Slider
-            mt={2}
-            min={15}
-            max={200}
-            colorScheme={THEME.secondary.colour}
-            aria-label="sample-size"
-            defaultValue={numberOfBars}
-            onChange={(v) => handleSliderChange(v)}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-          >
-            <SliderTrack>
-              <SliderFilledTrack />
-            </SliderTrack>
-            <Tooltip
-              hasArrow
-              bg={`${THEME.secondary.colour}.500`}
-              color="white"
-              placement="bottom"
-              isOpen={showTooltip}
-              label={`${numberOfBars}`}
-            >
-              <SliderThumb />
-            </Tooltip>
-          </Slider>
+            handleChange={handleSliderChange}
+            numberOfBars={numberOfBars}
+          />
         </Box>
         <div>
           <Button
