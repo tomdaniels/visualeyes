@@ -1,4 +1,3 @@
-export const PRIMARY_COLOUR = 'pink';
-export const SECONDARY_COLOUR = 'yellow';
-export const NUMBER_OF_ARRAY_BARS = 125;
-export const ANIMATION_SPEED_MS = 10;
+export { default as THEME } from './colours';
+export const ANIMATION_SPEED_MS: number = 10;
+export const NUMBER_OF_ARRAY_BARS: number = 80;

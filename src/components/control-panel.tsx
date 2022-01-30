@@ -1,6 +1,14 @@
 import React from 'react';
-
-import * as styles from '../styles/control-panel.style';
+import {
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  Box,
+  Button,
+  Flex,
+} from '@chakra-ui/react';
+import { THEME } from '../constants';
 
 interface ControlPanelProps {
   onReset: Function;
@@ -18,23 +26,51 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   array,
 }) => {
   return (
-    <div css={styles.buttonGroup}>
-      <div>
-        <button onClick={() => onReset()}>generate new array</button>
-        <input
-          type="range"
-          min={15}
-          value={numberOfBars}
-          max={200}
-          onChange={(e) => handleSliderChange(e.target)}
-        />
-      </div>
-      <div>
-        <button onClick={() => handleSortClick(array)}>merge sort!</button>
-        <button disabled>quick sort</button>
-        <button disabled>insertion sort</button>
-      </div>
-    </div>
+    <Box w="90%" m="8px auto 0">
+      <Flex justifyContent="space-between" align="center">
+        <div>
+          <Button
+            variant="outline"
+            color={`${THEME.primary.colour}.500`}
+            colorScheme={THEME.secondary.colour}
+            borderColor={`${THEME.secondary.colour}.400`}
+            onClick={() => onReset()}
+          >
+            generate new array
+          </Button>
+          <Slider
+            min={15}
+            max={200}
+            colorScheme={THEME.secondary.colour}
+            aria-label="sample-size"
+            defaultValue={numberOfBars}
+            onChange={(v) => handleSliderChange(v)}
+          >
+            <SliderTrack>
+              <SliderFilledTrack
+                onChange={(e) => handleSliderChange(e.target)}
+              />
+            </SliderTrack>
+            <SliderThumb />
+          </Slider>
+        </div>
+        <div>
+          <Button
+            variant="ghost"
+            colorScheme={THEME.primary.colour}
+            onClick={() => handleSortClick(array)}
+          >
+            merge sort!
+          </Button>
+          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
+            quick sort
+          </Button>
+          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
+            insertion sort
+          </Button>
+        </div>
+      </Flex>
+    </Box>
   );
 };
 

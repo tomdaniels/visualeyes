@@ -1,39 +1,4 @@
-import {
-  PRIMARY_COLOUR,
-  SECONDARY_COLOUR,
-  ANIMATION_SPEED_MS,
-} from 'src/constants';
-
-export default function animate(arr: number[]): void {
-  const animations = getMergeSortAnimations(arr);
-
-  for (let i = 0; i < animations.length; i++) {
-    const arrayBars = Array.from(
-      document.getElementsByClassName(
-        'array-bar'
-      ) as HTMLCollectionOf<HTMLElement>
-    );
-    const isColourChange = i % 3 !== 2;
-    if (isColourChange) {
-      const [barOneIdx, barTwoIdx] = animations[i];
-      const barOneStyle = arrayBars[barOneIdx].style;
-      const barTwoStyle = arrayBars[barTwoIdx].style;
-      const colour = i % 3 === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
-      setTimeout(() => {
-        barOneStyle.backgroundColor = colour;
-        barTwoStyle.backgroundColor = colour;
-      }, i * ANIMATION_SPEED_MS);
-    } else {
-      setTimeout(() => {
-        const [barOneIdx, newHeight] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        barOneStyle.height = `${newHeight}px`;
-      }, i * ANIMATION_SPEED_MS);
-    }
-  }
-}
-
-function getMergeSortAnimations(array: number[]): any {
+export default function getMergeSortAnimations(array: number[]): any {
   const animations: [number, number][] = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
