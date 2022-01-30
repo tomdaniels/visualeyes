@@ -8,6 +8,7 @@ import {
   Button,
   Flex,
 } from '@chakra-ui/react';
+import { THEME } from '../constants';
 
 interface ControlPanelProps {
   onReset: Function;
@@ -30,9 +31,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         <div>
           <Button
             variant="outline"
-            color="pink.500"
-            colorScheme="yellow"
-            borderColor="yellow.400"
+            color={`${THEME.primary.colour}.500`}
+            colorScheme={THEME.secondary.colour}
+            borderColor={`${THEME.secondary.colour}.400`}
             onClick={() => onReset()}
           >
             generate new array
@@ -40,7 +41,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           <Slider
             min={15}
             max={200}
-            colorScheme="yellow"
+            colorScheme={THEME.secondary.colour}
             aria-label="sample-size"
             defaultValue={numberOfBars}
             onChange={(v) => handleSliderChange(v)}
@@ -56,15 +57,15 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         <div>
           <Button
             variant="ghost"
-            colorScheme="pink"
+            colorScheme={THEME.primary.colour}
             onClick={() => handleSortClick(array)}
           >
             merge sort!
           </Button>
-          <Button variant="ghost" colorScheme="pink" disabled>
+          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
             quick sort
           </Button>
-          <Button variant="ghost" colorScheme="pink" disabled>
+          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
             insertion sort
           </Button>
         </div>

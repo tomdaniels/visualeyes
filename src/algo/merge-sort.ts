@@ -1,8 +1,4 @@
-import {
-  PRIMARY_COLOUR,
-  SECONDARY_COLOUR,
-  ANIMATION_SPEED_MS,
-} from 'src/constants';
+import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
 
 export default function animate(arr: number[]): void {
   const animations = getMergeSortAnimations(arr);
@@ -18,7 +14,7 @@ export default function animate(arr: number[]): void {
       const [barOneIdx, barTwoIdx] = animations[i];
       const barOneStyle = arrayBars[barOneIdx].style;
       const barTwoStyle = arrayBars[barTwoIdx].style;
-      const colour = i % 3 === 0 ? SECONDARY_COLOUR : PRIMARY_COLOUR;
+      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
         barOneStyle.backgroundColor = colour;
         barTwoStyle.backgroundColor = colour;
