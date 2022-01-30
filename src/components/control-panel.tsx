@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Slider,
   SliderTrack,
@@ -6,7 +6,7 @@ import {
   SliderThumb,
   Box,
   Button,
-  Text,
+  Tooltip,
   Flex,
 } from '@chakra-ui/react';
 import { THEME } from '../constants';
@@ -25,10 +25,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   numberOfBars,
   array,
 }) => {
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
   return (
-    <Box w="90%" m="8px auto">
+    <Box w="90%" m="8px auto 2px">
       <Flex justifyContent="space-between" align="center">
-        <Flex align="center">
+        <Box>
           <Button
             variant="outline"
             color={`${THEME.primary.colour}.500`}
@@ -38,23 +39,32 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           >
             generate new array
           </Button>
-          <Box ml={4}>
-            <Slider
-              min={15}
-              max={200}
-              colorScheme={THEME.secondary.colour}
-              aria-label="sample-size"
-              defaultValue={numberOfBars}
-              onChange={(v) => handleSliderChange(v)}
+          <Slider
+            mt={2}
+            min={15}
+            max={200}
+            colorScheme={THEME.secondary.colour}
+            aria-label="sample-size"
+            defaultValue={numberOfBars}
+            onChange={(v) => handleSliderChange(v)}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <Tooltip
+              hasArrow
+              bg={`${THEME.secondary.colour}.500`}
+              color="white"
+              placement="bottom"
+              isOpen={showTooltip}
+              label={`${numberOfBars}`}
             >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
               <SliderThumb />
-            </Slider>
-            <Text>sample size: {numberOfBars}</Text>
-          </Box>
-        </Flex>
+            </Tooltip>
+          </Slider>
+        </Box>
         <div>
           <Button
             variant="ghost"
