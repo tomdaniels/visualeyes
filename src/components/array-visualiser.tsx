@@ -2,6 +2,7 @@ import { ReactElement, useState, useEffect, useCallback } from 'react';
 import ControlPanel from './control-panel';
 import randomIntBetween from '../utils/random-int-between';
 import animateMergeSort from '../animations/merge-sort';
+import animateQuickSort from '../animations/quick-sort';
 import clearNodeStyles from '../utils/clear-node-styles';
 import { NUMBER_OF_ARRAY_BARS } from '../constants';
 
@@ -37,8 +38,14 @@ export default function ArrayVisualiser(): ReactElement {
     }
   }, [resetArray, isMounted, array]);
 
-  function handleClick(array: number[]) {
+  function handleClick(type: string, array: number[]) {
     if (isSorted) {
+      return;
+    }
+
+    if (type === 'quick sort') {
+      animateQuickSort(array.slice());
+      setIsSorted(true);
       return;
     }
 

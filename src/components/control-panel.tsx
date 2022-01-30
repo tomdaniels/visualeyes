@@ -69,11 +69,17 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           <Button
             variant="ghost"
             colorScheme={THEME.primary.colour}
-            onClick={() => handleSortClick(array)}
+            onClick={() => handleSortClick('merge sort', array)}
           >
             merge sort!
           </Button>
-          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
+          <Button
+            variant="ghost"
+            colorScheme={THEME.primary.colour}
+            onClick={() => {
+              handleSortClick('quick sort', array);
+            }}
+          >
             quick sort
           </Button>
           <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
