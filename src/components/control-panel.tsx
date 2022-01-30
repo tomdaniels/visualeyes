@@ -6,10 +6,10 @@ import {
   SliderThumb,
   Box,
   Button,
+  Text,
   Flex,
 } from '@chakra-ui/react';
 import { THEME } from '../constants';
-
 interface ControlPanelProps {
   onReset: Function;
   handleSliderChange: Function;
@@ -26,9 +26,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   array,
 }) => {
   return (
-    <Box w="90%" m="8px auto 0">
+    <Box w="90%" m="8px auto">
       <Flex justifyContent="space-between" align="center">
-        <div>
+        <Flex align="center">
           <Button
             variant="outline"
             color={`${THEME.primary.colour}.500`}
@@ -38,22 +38,23 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           >
             generate new array
           </Button>
-          <Slider
-            min={15}
-            max={200}
-            colorScheme={THEME.secondary.colour}
-            aria-label="sample-size"
-            defaultValue={numberOfBars}
-            onChange={(v) => handleSliderChange(v)}
-          >
-            <SliderTrack>
-              <SliderFilledTrack
-                onChange={(e) => handleSliderChange(e.target)}
-              />
-            </SliderTrack>
-            <SliderThumb />
-          </Slider>
-        </div>
+          <Box ml={4}>
+            <Slider
+              min={15}
+              max={200}
+              colorScheme={THEME.secondary.colour}
+              aria-label="sample-size"
+              defaultValue={numberOfBars}
+              onChange={(v) => handleSliderChange(v)}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+            <Text>sample size: {numberOfBars}</Text>
+          </Box>
+        </Flex>
         <div>
           <Button
             variant="ghost"
