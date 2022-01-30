@@ -1,13 +1,13 @@
 export default function quickSort(
   arr: number[],
   left: number = 0,
-  right = arr.length - 1
-): [number, number][] {
-  const animations: [number, number][] = [];
+  right = arr.length - 1,
+  animations: any[] = []
+): any[] {
   if (left < right) {
     let pivotIndex = pivot(arr, left, right, animations);
-    quickSort(arr, left, pivotIndex - 1);
-    quickSort(arr, pivotIndex + 1, right);
+    quickSort(arr, left, pivotIndex - 1, animations);
+    quickSort(arr, pivotIndex + 1, right, animations);
   }
   return animations;
 }
