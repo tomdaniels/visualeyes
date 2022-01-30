@@ -69,7 +69,7 @@ export default function ArrayVisualiser(): ReactElement {
               value,
               numberOfBars <= 20
                 ? numberOfBars * 10
-                : numberOfBars <= 50
+                : numberOfBars <= 60
                 ? numberOfBars * 5
                 : numberOfBars / 2
             )}
