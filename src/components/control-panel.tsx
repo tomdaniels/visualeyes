@@ -9,7 +9,8 @@ import {
   Tooltip,
   Flex,
 } from '@chakra-ui/react';
-import { THEME } from '../constants';
+import { THEME, ALGOS } from '../constants';
+
 interface ControlPanelProps {
   onReset: Function;
   handleSliderChange: Function;
@@ -69,14 +70,25 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           <Button
             variant="ghost"
             colorScheme={THEME.primary.colour}
-            onClick={() => handleSortClick(array)}
+            onClick={() => handleSortClick(ALGOS.MERGE_SORT, array)}
           >
             merge sort!
           </Button>
-          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
+          <Button
+            variant="ghost"
+            colorScheme={THEME.primary.colour}
+            onClick={() => {
+              handleSortClick(ALGOS.QUICK_SORT, array);
+            }}
+          >
             quick sort
           </Button>
-          <Button variant="ghost" colorScheme={THEME.primary.colour} disabled>
+          <Button
+            variant="ghost"
+            colorScheme={THEME.primary.colour}
+            disabled
+            // onClick={() => handleSortClick(ALGOS.INSERTION_SORT, array)}
+          >
             insertion sort
           </Button>
         </div>
