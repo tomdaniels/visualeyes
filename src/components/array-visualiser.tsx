@@ -1,7 +1,7 @@
 import { ReactElement, useState, useEffect, useCallback } from 'react';
 import ControlPanel from './control-panel';
 import randomIntBetween from '../utils/random-int-between';
-import animateMergeSort from '../algo/merge-sort';
+import animateMergeSort from '../animations/merge-sort';
 import clearNodeStyles from '../utils/clear-node-styles';
 import { NUMBER_OF_ARRAY_BARS } from '../constants';
 
