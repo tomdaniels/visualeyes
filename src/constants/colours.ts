@@ -6,10 +6,11 @@ type ColourInfo = {
 type ColourScheme = {
   primary: ColourInfo;
   secondary: ColourInfo;
+  accent: ColourInfo;
 };
 
 const THEME: ColourScheme = {
-  // keep browser & chakra consistent
+  // use the hex property when browser doesnt match UI
   // source: https://chakra-ui.com/docs/theming/theme#colors
   primary: {
     hex: '#9F7AEA',
@@ -18,6 +19,10 @@ const THEME: ColourScheme = {
   secondary: {
     hex: '#0BC5EA',
     colour: 'cyan',
+  },
+  accent: {
+    colour: 'yellow',
+    hex: '#FEFCBF',
   },
 };
 

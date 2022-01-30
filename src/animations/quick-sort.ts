@@ -28,8 +28,8 @@ export default function animateQuickSort(arr: number[]): void {
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
       const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
-        startNodeStyle.backgroundColor = 'yellow';
-        endNodeStyle.backgroundColor = 'yellow';
+        startNodeStyle.backgroundColor = THEME.accent.hex;
+        endNodeStyle.backgroundColor = THEME.accent.hex;
         pivotNodeStyle.backgroundColor = colour;
         compareNodeStyle.backgroundColor = colour;
       }, i * ANIMATION_SPEED_MS);
