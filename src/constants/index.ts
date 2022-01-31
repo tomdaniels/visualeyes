@@ -6,3 +6,9 @@ export const ALGOS = {
   QUICK_SORT: 'quick-sort',
   INSERTION_SORT: 'insertion-sort',
 };
+
+export enum STATUS {
+  SORTED = 'sorted',
+  RUNNING = 'running',
+  CLEAN = 'clean',
+}
