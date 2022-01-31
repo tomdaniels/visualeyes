@@ -4,12 +4,12 @@ import getQuickSortAnimations from '../algo/quick-sort';
 export default function animateQuickSort(arr: number[], onCompletion: Function): void {
   const animations = getQuickSortAnimations(arr);
 
+  const arrayBars = Array.from(
+    document.getElementsByClassName(
+      'array-bar'
+    ) as HTMLCollectionOf<HTMLElement>
+  );
   for (let i = 0; i < animations.length; i++) {
-    const arrayBars = Array.from(
-      document.getElementsByClassName(
-        'array-bar'
-      ) as HTMLCollectionOf<HTMLElement>
-    );
     if (i === animations.length - 1) {
       setTimeout(() => {
         // animate completion
