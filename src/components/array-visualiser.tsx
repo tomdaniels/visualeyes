@@ -42,8 +42,7 @@ export default function ArrayVisualiser(): ReactElement {
       return;
     }
     setStatus(STATUS.RUNNING);
-    runAnimatedAlgorithm(type, array);
-    setStatus(STATUS.SORTED);
+    runAnimatedAlgorithm(type, array, () => setStatus(STATUS.SORTED));
   }
 
   function handleSlider(newCount: number) {
