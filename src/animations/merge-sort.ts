@@ -1,15 +1,20 @@
 import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
 import getMergeSortAnimations from '../algo/merge-sort';
 
-export default function animateMergeSort(arr: number[]): void {
+export default function animateMergeSort(arr: number[], onCompletion: Function): void {
   const animations = getMergeSortAnimations(arr);
 
+  const arrayBars = Array.from(
+    document.getElementsByClassName(
+      'array-bar'
+    ) as HTMLCollectionOf<HTMLElement>
+  );
   for (let i = 0; i < animations.length; i++) {
-    const arrayBars = Array.from(
-      document.getElementsByClassName(
-        'array-bar'
-      ) as HTMLCollectionOf<HTMLElement>
-    );
+    if (i === animations.length - 1) {
+      setTimeout(() => {
+        onCompletion();
+      }, i * ANIMATION_SPEED_MS)
+    }
     const isColourChange = i % 3 !== 2;
     if (isColourChange) {
       const [barOneIdx, barTwoIdx] = animations[i];

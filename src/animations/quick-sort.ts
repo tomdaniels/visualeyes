@@ -1,21 +1,22 @@
 import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
 import getQuickSortAnimations from '../algo/quick-sort';
 
-export default function animateQuickSort(arr: number[]): void {
+export default function animateQuickSort(arr: number[], onCompletion: Function): void {
   const animations = getQuickSortAnimations(arr);
 
+  const arrayBars = Array.from(
+    document.getElementsByClassName(
+      'array-bar'
+    ) as HTMLCollectionOf<HTMLElement>
+  );
   for (let i = 0; i < animations.length; i++) {
-    const arrayBars = Array.from(
-      document.getElementsByClassName(
-        'array-bar'
-      ) as HTMLCollectionOf<HTMLElement>
-    );
     if (i === animations.length - 1) {
       setTimeout(() => {
         // animate completion
         for (let i = 0; i < arr.length; i++) {
           arrayBars[i].style.backgroundColor = THEME.primary.hex;
         }
+        onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
     const isColourChange = i % 3 !== 2;

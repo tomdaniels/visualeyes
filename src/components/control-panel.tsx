@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Flex } from '@chakra-ui/react';
 import Slider from './slider';
-import { THEME, ALGOS } from '../constants';
+import { THEME, ALGOS, STATUS } from '../constants';
 
 interface ControlPanelProps {
   onReset: Function;
@@ -9,6 +9,7 @@ interface ControlPanelProps {
   handleSortClick: Function;
   numberOfBars: number;
   array: number[];
+  status: STATUS;
 }
 
 const ControlPanel: React.FC<ControlPanelProps> = ({
@@ -16,6 +17,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   handleSliderChange,
   handleSortClick,
   numberOfBars,
+  status,
   array,
 }) => {
   return (
@@ -24,6 +26,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         <Box>
           <Button
             variant="outline"
+            disabled={status === STATUS.RUNNING}
             color={`${THEME.primary.colour}.500`}
             colorScheme={THEME.secondary.colour}
             borderColor={`${THEME.secondary.colour}.400`}
@@ -39,6 +42,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         <div>
           <Button
             variant="ghost"
+            disabled={status === STATUS.SORTED}
             colorScheme={THEME.primary.colour}
             onClick={() => handleSortClick(ALGOS.MERGE_SORT, array)}
           >
@@ -46,6 +50,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           </Button>
           <Button
             variant="ghost"
+            disabled={status === STATUS.SORTED}
             colorScheme={THEME.primary.colour}
             onClick={() => {
               handleSortClick(ALGOS.QUICK_SORT, array);
