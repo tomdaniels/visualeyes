@@ -10,6 +10,14 @@ export default function animateQuickSort(arr: number[]): void {
         'array-bar'
       ) as HTMLCollectionOf<HTMLElement>
     );
+    if (i === animations.length - 1) {
+      setTimeout(() => {
+        // animate completion
+        for (let i = 0; i < arr.length; i++) {
+          arrayBars[i].style.backgroundColor = THEME.primary.hex;
+        }
+      }, i * ANIMATION_SPEED_MS);
+    }
     const isColourChange = i % 3 !== 2;
     if (isColourChange) {
       const [pivotNodeIdx, swapNodeIdx, compareNodeIdx] =
@@ -18,10 +26,16 @@ export default function animateQuickSort(arr: number[]): void {
       const swapNodeStyle = arrayBars[swapNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
       const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
+      const previous = animations[i - 3];
       setTimeout(() => {
         pivotNodeStyle.backgroundColor = THEME.accent.hex;
         swapNodeStyle.backgroundColor = colour;
         compareNodeStyle.backgroundColor = colour;
+        if (!!previous && pivotNodeIdx !== previous[0]) {
+          const oldStartIdx = previous[0];
+          const oldStartNodeStyles = arrayBars[oldStartIdx].style;
+          oldStartNodeStyles.backgroundColor = THEME.primary.hex;
+        }
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {

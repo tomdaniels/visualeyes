@@ -21,16 +21,19 @@ function pivot(
   let pivot = arr[start];
   let swapIdx = start;
 
+  // animation helper.
+  const pivotIdx = end === arr.length - 1 ? swapIdx : end;
+
   for (let i = start + 1; i <= end; i++) {
     if (pivot > arr[i]) {
       swapIdx++;
-      animations.push([start, swapIdx, i]);
-      animations.push([start, swapIdx, i]);
+      animations.push([pivotIdx, swapIdx, i]);
+      animations.push([pivotIdx, swapIdx, i]);
       swap(arr, swapIdx, i, animations);
     }
   }
-  animations.push([start, start, swapIdx]);
-  animations.push([start, start, swapIdx]);
+  animations.push([pivotIdx, start, swapIdx]);
+  animations.push([pivotIdx, start, swapIdx]);
   swap(arr, start, swapIdx, animations);
   return swapIdx;
 }
@@ -39,7 +42,7 @@ function swap(
   x: number[],
   idx: number,
   idj: number,
-  animations: any[],
+  animations: any[]
 ): number[] {
   const temp = x[idx];
   animations.push([idx, x[idj], idj, x[idx]]);
