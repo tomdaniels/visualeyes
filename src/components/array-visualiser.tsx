@@ -2,32 +2,32 @@ import { ReactElement, useState, useEffect, useCallback } from 'react';
 import ControlPanel from './control-panel';
 import randomIntBetween from '../utils/random-int-between';
 import clearNodeStyles from '../utils/clear-node-styles';
-import { NUMBER_OF_ARRAY_BARS } from '../constants';
+import { STATUS, NUMBER_OF_ARRAY_BARS } from '../constants';
 import runAnimatedAlgorithm from '../animations';
 
 import * as styles from '../styles/array-visualiser.style';
 
 export default function ArrayVisualiser(): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [isSorted, setIsSorted] = useState<boolean>(false);
+  const [status, setStatus] = useState<STATUS>(STATUS.CLEAN);
   const [array, setArray] = useState<number[]>([]);
   const [numberOfBars, setNumberOfBars] =
     useState<number>(NUMBER_OF_ARRAY_BARS);
 
   const resetArray = useCallback(
     (length: number = 0): void => {
-      if (isSorted) {
+      if (status === STATUS.SORTED) {
         clearNodeStyles('array-bar');
+        setStatus(STATUS.CLEAN);
       }
 
       const newArray = [];
       for (let i = 0; i < (length !== 0 ? length : numberOfBars); i++) {
         newArray.push(randomIntBetween(20, 950));
       }
-      setIsSorted(false);
       setArray(newArray);
     },
-    [numberOfBars, isSorted]
+    [numberOfBars, status]
   );
 
   useEffect(() => {
@@ -38,11 +38,12 @@ export default function ArrayVisualiser(): ReactElement {
   }, [resetArray, isMounted, array]);
 
   function handleClick(type: string, array: number[]) {
-    if (isSorted) {
+    if (status === STATUS.RUNNING) {
       return;
     }
+    setStatus(STATUS.RUNNING);
     runAnimatedAlgorithm(type, array);
-    setIsSorted(true);
+    setStatus(STATUS.SORTED);
   }
 
   function handleSlider(newCount: number) {
@@ -57,6 +58,7 @@ export default function ArrayVisualiser(): ReactElement {
         handleSliderChange={handleSlider}
         handleSortClick={handleClick}
         numberOfBars={numberOfBars}
+        status={status}
         array={array}
       />
       <div css={styles.grid}>
