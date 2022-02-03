@@ -61,6 +61,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           <Button
             variant="ghost"
             colorScheme={THEME.primary.colour}
+            disabled={status === STATUS.SORTED}
             onClick={() => handleSortClick(ALGOS.INSERTION_SORT, array)}
           >
             insertion sort
