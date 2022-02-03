@@ -23,7 +23,7 @@ export default function ArrayVisualiser(): ReactElement {
 
       const newArray = [];
       for (let i = 0; i < (length !== 0 ? length : numberOfBars); i++) {
-        newArray.push(randomIntBetween(20, 950));
+        newArray.push(randomIntBetween(20, window.innerHeight / 1.25));
       }
       setArray(newArray);
     },
