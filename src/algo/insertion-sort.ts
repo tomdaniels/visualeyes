@@ -1,6 +1,7 @@
-// inserts a value into its correct place in each pass
-function insertionSort(x: any[]): any[] {
-  const animations: [number, number, number?][] = [];
+type AnimationsArray = [number, number, number?][];
+
+function insertionSort(x: number[]): AnimationsArray {
+  const animations: AnimationsArray = [];
   for (let i = 1; i < x.length; i++) {
     const currentVal = x[i];
     for (var j = i - 1; j >= 0 && x[j] > currentVal; j--) {
