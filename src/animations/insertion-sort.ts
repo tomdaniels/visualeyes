@@ -22,19 +22,20 @@ export default function animateMergeSort(
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
-    console.log(animations[i]);
     const isComparison = animations[i].length === 2;
     if (isComparison) {
-      const [sortedNodeIdx, compareNode] = animations[i];
+      const [sortedNodeIdx, compareNode] = animations[i] as [
+        number,
+        [number, number]
+      ];
       const sortedBarStyle = arrayBars[sortedNodeIdx].style;
-      const compareNodeStyle =
-        arrayBars[(compareNode as [number, number])[0]].style;
+      const compareNodeStyle = arrayBars[compareNode[0]].style;
 
       const colour =
         i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
         compareNodeStyle.backgroundColor = colour;
-        compareNodeStyle.height = `${(compareNode as [number, number])[1]}px`;
+        compareNodeStyle.height = `${compareNode[1]}px`;
         sortedBarStyle.backgroundColor = THEME.accent.hex;
       }, i * ANIMATION_SPEED_MS);
     } else {
