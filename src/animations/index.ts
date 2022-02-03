@@ -1,6 +1,7 @@
 import { ALGOS } from '../constants';
 import mergeSort from './merge-sort';
 import quickSort from './quick-sort';
+import insertionSort from './insertion-sort';
 
 const algorithmMap: Map<
   string,
@@ -8,7 +9,7 @@ const algorithmMap: Map<
 > = new Map([
   [ALGOS.MERGE_SORT, mergeSort],
   [ALGOS.QUICK_SORT, quickSort],
-  // [ALGOS.INSERTION_SORT, insertionSort],
+  [ALGOS.INSERTION_SORT, insertionSort],
 ]);
 
 const getAlgorithm = (type: string, array: number[], onCompletion: Function) =>
