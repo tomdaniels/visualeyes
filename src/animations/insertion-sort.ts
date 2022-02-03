@@ -22,27 +22,24 @@ export default function animateMergeSort(
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
-    const isComparison = animations[i].length === 2;
+    const isComparison = animations[i].length === 3;
     if (isComparison) {
-      const [sortedNodeIdx, compareNode] = animations[i] as [
-        number,
-        [number, number]
-      ];
+      const [sortedNodeIdx, compareNodeIdx, compareNodeHeight] = animations[i];
       const sortedBarStyle = arrayBars[sortedNodeIdx].style;
-      const compareNodeStyle = arrayBars[compareNode[0]].style;
+      const compareNodeStyle = arrayBars[compareNodeIdx].style;
 
       const colour =
         i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
         compareNodeStyle.backgroundColor = colour;
-        compareNodeStyle.height = `${compareNode[1]}px`;
+        compareNodeStyle.height = `${compareNodeHeight}px`;
         sortedBarStyle.backgroundColor = THEME.accent.hex;
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
-        const [idx, xNewHeight] = animations[i];
+        const [idx, correctHeight] = animations[i];
         const sortedNode = arrayBars[idx].style;
-        sortedNode.height = `${xNewHeight}px`;
+        sortedNode.height = `${correctHeight}px`;
         sortedNode.backgroundColor = THEME.primary.hex;
       }, i * ANIMATION_SPEED_MS);
     }
