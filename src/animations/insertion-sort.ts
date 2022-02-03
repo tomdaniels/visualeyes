@@ -25,12 +25,17 @@ export default function animateMergeSort(
       const [barOneIdx, barTwoIdx] = animations[i];
       const barOneStyle = arrayBars[barOneIdx].style;
       const barTwoStyle = arrayBars[barTwoIdx].style;
+      const compareNode = arrayBars[barTwoIdx + 1];
 
       const colour =
         i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
         barOneStyle.backgroundColor = colour;
         barTwoStyle.backgroundColor = THEME.accent.hex;
+
+        if (compareNode) {
+          compareNode.style.backgroundColor = THEME.secondary.colour;
+        }
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
