@@ -39,7 +39,6 @@ export default function animateMergeSort(
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
-        console.log(animations[i]);
         const [barOneIdx, xNewHeight] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         barOneStyle.height = `${xNewHeight}px`;
