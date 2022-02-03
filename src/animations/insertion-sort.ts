@@ -22,29 +22,27 @@ export default function animateMergeSort(
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
+    console.log(animations[i]);
     const isComparison = animations[i].length === 2;
     if (isComparison) {
-      const [barOneIdx, barTwoIdx] = animations[i];
-      const barOneStyle = arrayBars[barOneIdx].style;
-      const barTwoStyle = arrayBars[barTwoIdx].style;
-      const compareNode = arrayBars[barTwoIdx + 1];
+      const [sortedNodeIdx, compareNode] = animations[i];
+      const sortedBarStyle = arrayBars[sortedNodeIdx].style;
+      const compareNodeStyle =
+        arrayBars[(compareNode as [number, number])[0]].style;
 
       const colour =
         i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.hex;
       setTimeout(() => {
-        barOneStyle.backgroundColor = colour;
-        barTwoStyle.backgroundColor = THEME.accent.hex;
-
-        if (compareNode) {
-          compareNode.style.backgroundColor = THEME.secondary.colour;
-        }
+        compareNodeStyle.backgroundColor = colour;
+        compareNodeStyle.height = `${(compareNode as [number, number])[1]}px`;
+        sortedBarStyle.backgroundColor = THEME.accent.hex;
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
-        const [barOneIdx, xNewHeight] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        barOneStyle.height = `${xNewHeight}px`;
-        barOneStyle.backgroundColor = THEME.primary.hex;
+        const [idx, xNewHeight] = animations[i];
+        const sortedNode = arrayBars[idx].style;
+        sortedNode.height = `${xNewHeight}px`;
+        sortedNode.backgroundColor = THEME.primary.hex;
       }, i * ANIMATION_SPEED_MS);
     }
   }
