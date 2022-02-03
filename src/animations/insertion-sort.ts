@@ -25,7 +25,7 @@ export default function animateMergeSort(
     const isComparison = animations[i].length === 3;
     if (isComparison) {
       const [sortedNodeIdx, compareNodeIdx, compareNodeHeight] = animations[i];
-      const sortedBarStyle = arrayBars[sortedNodeIdx].style;
+      const sortedNodeStyle = arrayBars[sortedNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
 
       const colour =
@@ -33,7 +33,7 @@ export default function animateMergeSort(
       setTimeout(() => {
         compareNodeStyle.backgroundColor = colour;
         compareNodeStyle.height = `${compareNodeHeight}px`;
-        sortedBarStyle.backgroundColor = THEME.accent.hex;
+        sortedNodeStyle.backgroundColor = THEME.accent.hex;
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
