@@ -7,7 +7,7 @@ import runAnimatedAlgorithm from '../animations';
 
 import * as styles from '../styles/array-visualiser.style';
 
-function ArrayVisualiser({ print }: { print?: string }): ReactElement {
+function ArrayVisualiser(): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [status, setStatus] = useState<STATUS>(STATUS.CLEAN);
   const [array, setArray] = useState<number[]>([]);
@@ -27,11 +27,10 @@ function ArrayVisualiser({ print }: { print?: string }): ReactElement {
       }
       setArray(newArray);
     },
-    [numberOfBars, status, print]
+    [numberOfBars, status]
   );
 
   useEffect(() => {
-    console.log(print);
     if (!isMounted) {
       setIsMounted(true);
       resetArray();
@@ -82,11 +81,9 @@ function ArrayVisualiser({ print }: { print?: string }): ReactElement {
 }
 
 export async function getStaticProps() {
-  const print = process.env.MY_SECRET;
+  console.log(process.env.MY_SECRET);
   return {
-    props: {
-      print,
-    },
+    props: {},
   };
 }
 
