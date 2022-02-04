@@ -2,18 +2,15 @@ import setPreviousStyles from './helpers/set-previous-styles';
 import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getMergeSortAnimations from '../algo/merge-sort';
 import animateCompletion from './helpers/animate-completion';
+import getArrayBars from '../utils/get-array-bars';
 
 export default function animateMergeSort(
   arr: number[],
   onCompletion: Function
 ): void {
+  const arrayBars = getArrayBars(document);
   const animations = getMergeSortAnimations(arr);
 
-  const arrayBars = Array.from(
-    document.getElementsByClassName(
-      'array-bar'
-    ) as HTMLCollectionOf<HTMLElement>
-  );
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
       setTimeout(() => {
@@ -21,6 +18,7 @@ export default function animateMergeSort(
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
+
     const isColourChange = i % 3 !== 2;
     if (isColourChange) {
       const [startIdx, endIdx, barOneIdx, barTwoIdx] = animations[i];
@@ -41,7 +39,6 @@ export default function animateMergeSort(
             previous: animations[i - 3],
             startIdx,
             endIdx,
-            arrayBars,
             colour: THEME.primary.light,
           });
         }

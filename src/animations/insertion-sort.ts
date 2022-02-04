@@ -1,18 +1,14 @@
 import { ANIMATION_SPEED_MS, THEME } from 'src/constants';
 import getInsertionSortAnimations from '../algo/insertion-sort';
 import animateCompletion from './helpers/animate-completion';
+import getArrayBars from '../utils/get-array-bars';
 
 export default function animateMergeSort(
   arr: number[],
   onCompletion: Function
 ): void {
+  const arrayBars = getArrayBars(document);
   const animations = getInsertionSortAnimations(arr);
-
-  const arrayBars = Array.from(
-    document.getElementsByClassName(
-      'array-bar'
-    ) as HTMLCollectionOf<HTMLElement>
-  );
 
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
@@ -21,6 +17,7 @@ export default function animateMergeSort(
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
+
     const isComparison = animations[i].length === 3;
     if (isComparison) {
       const [sortedNodeIdx, compareNodeIdx, compareNodeHeight] = animations[i];

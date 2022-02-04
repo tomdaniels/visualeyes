@@ -1,8 +1,9 @@
+import getArrayBars from '../../utils/get-array-bars';
+
 type PreviousNodeProperties = {
   previous: any[];
   startIdx: number;
   endIdx: number;
-  arrayBars: any[];
   colour: string;
 };
 
@@ -12,9 +13,9 @@ function setPreviousStyles({
   previous,
   startIdx,
   endIdx,
-  arrayBars,
   colour,
 }: PreviousNodeProperties): void {
+  const arrayBars = getArrayBars(document);
   if (!!previous) {
     if (startIdx !== previous[0]) {
       const oldStartIdx = previous[0];
