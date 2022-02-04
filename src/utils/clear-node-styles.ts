@@ -1,7 +1,7 @@
-const clearNodeStyles = (className: string) => {
-  const nodes = Array.from(
-    document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>
-  );
+import getArrayBars from './get-array-bars';
+
+const clearNodeStyles = (): void => {
+  const nodes = getArrayBars(document);
   nodes.forEach((elem: HTMLElement) => elem.setAttribute('style', ''));
 };
 

@@ -17,7 +17,7 @@ export default function ArrayVisualiser(): ReactElement {
   const resetArray = useCallback(
     (length: number = 0): void => {
       if (status === STATUS.SORTED) {
-        clearNodeStyles('array-bar');
+        clearNodeStyles();
         setStatus(STATUS.CLEAN);
       }
 
