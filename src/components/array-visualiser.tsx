@@ -31,6 +31,7 @@ export default function ArrayVisualiser(): ReactElement {
   );
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_MY_SECRET);
     if (!isMounted) {
       setIsMounted(true);
       resetArray();
