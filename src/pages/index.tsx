@@ -9,4 +9,12 @@ const Visualeyes: NextPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  const name = process.env.MY_SECRET;
+  console.log(`connection to db with pass: ${name}`);
+  return {
+    props: {},
+  };
+}
+
 export default Visualeyes;

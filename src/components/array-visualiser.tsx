@@ -80,11 +80,4 @@ function ArrayVisualiser(): ReactElement {
   );
 }
 
-export async function getStaticProps() {
-  console.log(process.env.MY_SECRET);
-  return {
-    props: {},
-  };
-}
-
 export default ArrayVisualiser;
