@@ -24,10 +24,8 @@ export default function animateMergeSort(
       const sortedNodeStyle = arrayBars[sortedNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
 
-      const colour =
-        i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.light;
       setTimeout(() => {
-        compareNodeStyle.backgroundColor = colour;
+        compareNodeStyle.backgroundColor = THEME.secondary.colour;
         compareNodeStyle.height = `${compareNodeHeight}px`;
         sortedNodeStyle.backgroundColor = THEME.accent.hex;
       }, i * ANIMATION_SPEED_MS);
