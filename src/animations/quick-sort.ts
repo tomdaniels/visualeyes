@@ -1,6 +1,7 @@
 import setPreviousStyles from './helpers/setPreviousStyles';
 import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getQuickSortAnimations from '../algo/quick-sort';
+import animateCompletion from './helpers/animate-completion';
 
 export default function animateQuickSort(
   arr: number[],
@@ -16,10 +17,7 @@ export default function animateQuickSort(
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
       setTimeout(() => {
-        // animate completion
-        for (let i = 0; i < arr.length; i++) {
-          arrayBars[i].style.backgroundColor = THEME.primary.hex;
-        }
+        animateCompletion(arr, arrayBars);
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
@@ -31,7 +29,7 @@ export default function animateQuickSort(
       const pivotNodeStyle = arrayBars[pivotNodeIdx].style;
       const swapNodeStyle = arrayBars[swapNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
-      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
+      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.light;
       const previous = animations[i - 3];
       setTimeout(() => {
         startNodeStyle.backgroundColor = THEME.accent.hex;
@@ -44,7 +42,7 @@ export default function animateQuickSort(
             startIdx,
             endIdx: pivotNodeIdx,
             arrayBars,
-            colour: THEME.primary.hex,
+            colour: THEME.primary.light,
           });
         }
       }, i * ANIMATION_SPEED_MS);

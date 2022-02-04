@@ -1,6 +1,7 @@
 import setPreviousStyles from './helpers/setPreviousStyles';
 import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getMergeSortAnimations from '../algo/merge-sort';
+import animateCompletion from './helpers/animate-completion';
 
 export default function animateMergeSort(
   arr: number[],
@@ -16,8 +17,7 @@ export default function animateMergeSort(
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
       setTimeout(() => {
-        arrayBars[0].style.backgroundColor = THEME.primary.hex;
-        arrayBars[arr.length - 1].style.backgroundColor = THEME.primary.hex;
+        animateCompletion(arr, arrayBars);
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
@@ -28,7 +28,7 @@ export default function animateMergeSort(
       const endNodeStyle = arrayBars[endIdx].style;
       const barOneStyle = arrayBars[barOneIdx].style;
       const barTwoStyle = arrayBars[barTwoIdx].style;
-      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
+      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.light;
       const previous = animations[i - 3];
       setTimeout(() => {
         startNodeStyle.backgroundColor = THEME.accent.hex;
@@ -42,7 +42,7 @@ export default function animateMergeSort(
             startIdx,
             endIdx,
             arrayBars,
-            colour: THEME.primary.hex,
+            colour: THEME.primary.light,
           });
         }
       }, i * ANIMATION_SPEED_MS);

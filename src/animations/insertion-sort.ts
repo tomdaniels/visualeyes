@@ -1,5 +1,6 @@
 import { ANIMATION_SPEED_MS, THEME } from 'src/constants';
 import getInsertionSortAnimations from '../algo/insertion-sort';
+import animateCompletion from './helpers/animate-completion';
 
 export default function animateMergeSort(
   arr: number[],
@@ -16,9 +17,7 @@ export default function animateMergeSort(
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
       setTimeout(() => {
-        for (let i = 0; i < arr.length; i++) {
-          arrayBars[i].style.backgroundColor = THEME.primary.hex;
-        }
+        animateCompletion(arr, arrayBars);
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
@@ -29,7 +28,7 @@ export default function animateMergeSort(
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
 
       const colour =
-        i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.hex;
+        i !== 0 && i % 2 === 0 ? THEME.secondary.colour : THEME.primary.light;
       setTimeout(() => {
         compareNodeStyle.backgroundColor = colour;
         compareNodeStyle.height = `${compareNodeHeight}px`;
@@ -40,7 +39,7 @@ export default function animateMergeSort(
         const [idx, correctHeight] = animations[i];
         const sortedNode = arrayBars[idx].style;
         sortedNode.height = `${correctHeight}px`;
-        sortedNode.backgroundColor = THEME.primary.hex;
+        sortedNode.backgroundColor = THEME.primary.light;
       }, i * ANIMATION_SPEED_MS);
     }
   }
