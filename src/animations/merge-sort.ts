@@ -1,4 +1,4 @@
-import setPreviousStyles from './helpers/setPreviousStyles';
+import setPreviousStyles from './helpers/set-previous-styles';
 import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getMergeSortAnimations from '../algo/merge-sort';
 import animateCompletion from './helpers/animate-completion';
