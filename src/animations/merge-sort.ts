@@ -1,4 +1,5 @@
-import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
+import setPreviousStyles from './helpers/setPreviousStyles';
+import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getMergeSortAnimations from '../algo/merge-sort';
 
 export default function animateMergeSort(
@@ -33,17 +34,15 @@ export default function animateMergeSort(
         endNodeStyle.backgroundColor = THEME.accent.hex;
         barOneStyle.backgroundColor = colour;
         barTwoStyle.backgroundColor = colour;
+
         if (!!previous) {
-          if (startIdx !== previous[0]) {
-            const oldStartIdx = previous[0];
-            const oldStartNodeStyles = arrayBars[oldStartIdx].style;
-            oldStartNodeStyles.backgroundColor = THEME.primary.hex;
-          }
-          if (endIdx !== previous[1]) {
-            const oldEndIdx = previous[1];
-            const oldEndNodeStyles = arrayBars[oldEndIdx].style;
-            oldEndNodeStyles.backgroundColor = THEME.primary.hex;
-          }
+          setPreviousStyles({
+            previous: animations[i - 3],
+            startIdx,
+            endIdx,
+            arrayBars,
+            colour: THEME.primary.hex,
+          });
         }
       }, i * ANIMATION_SPEED_MS);
     } else {

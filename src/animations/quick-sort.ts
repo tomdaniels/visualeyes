@@ -1,4 +1,5 @@
-import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
+import setPreviousStyles from './helpers/setPreviousStyles';
+import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getQuickSortAnimations from '../algo/quick-sort';
 
 export default function animateQuickSort(
@@ -24,9 +25,9 @@ export default function animateQuickSort(
     }
     const isColourChange = i % 3 !== 2;
     if (isColourChange) {
-      const [startNodeIdx, pivotNodeIdx, swapNodeIdx, compareNodeIdx] =
+      const [startIdx, pivotNodeIdx, swapNodeIdx, compareNodeIdx] =
         animations[i];
-      const startNodeStyle = arrayBars[startNodeIdx].style;
+      const startNodeStyle = arrayBars[startIdx].style;
       const pivotNodeStyle = arrayBars[pivotNodeIdx].style;
       const swapNodeStyle = arrayBars[swapNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
@@ -38,16 +39,13 @@ export default function animateQuickSort(
         swapNodeStyle.backgroundColor = colour;
         compareNodeStyle.backgroundColor = colour;
         if (!!previous) {
-          if (startNodeIdx !== previous[0]) {
-            const oldStartIdx = previous[0];
-            const oldStartNodeStyles = arrayBars[oldStartIdx].style;
-            oldStartNodeStyles.backgroundColor = THEME.primary.hex;
-          }
-          if (pivotNodeIdx !== previous[1]) {
-            const oldPivotIdx = previous[1];
-            const oldPivotNodeStyles = arrayBars[oldPivotIdx].style;
-            oldPivotNodeStyles.backgroundColor = THEME.primary.hex;
-          }
+          setPreviousStyles({
+            previous,
+            startIdx,
+            endIdx: pivotNodeIdx,
+            arrayBars,
+            colour: THEME.primary.hex,
+          });
         }
       }, i * ANIMATION_SPEED_MS);
     } else {
