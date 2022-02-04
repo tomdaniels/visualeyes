@@ -6,7 +6,7 @@ import {
   SliderThumb,
   Tooltip,
 } from '@chakra-ui/react';
-import { THEME } from 'src/constants';
+import { THEME } from '../constants';
 
 interface SliderProps {
   handleChange: Function;

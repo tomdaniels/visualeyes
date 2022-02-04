@@ -1,4 +1,4 @@
-import { ANIMATION_SPEED_MS, THEME } from 'src/constants';
+import { ANIMATION_SPEED_MS, THEME } from '../constants';
 import getInsertionSortAnimations from '../algo/insertion-sort';
 import animateCompletion from './helpers/animate-completion';
 import getArrayBars from '../utils/get-array-bars';

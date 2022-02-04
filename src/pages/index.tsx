@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import ArrayVisualiser from 'src/components/array-visualiser';
+import ArrayVisualiser from '../components/array-visualiser';
 
 const Visualeyes: NextPage = () => {
   return (
