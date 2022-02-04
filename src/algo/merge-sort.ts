@@ -1,5 +1,6 @@
+type AnimationsArray = [number, number, number?, number?][];
 export default function getMergeSortAnimations(array: number[]): any {
-  const animations: [number, number][] = [];
+  const animations: AnimationsArray = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
   mergeSort(array.slice(), 0, array.length - 1, auxiliaryArray, animations);
@@ -11,7 +12,7 @@ function mergeSort(
   startIdx: number,
   endIdx: number,
   auxiliaryArray: number[],
-  animations: [number, number][]
+  animations: AnimationsArray
 ): void {
   if (startIdx === endIdx) return;
   const mid = Math.floor((startIdx + endIdx) / 2);
@@ -26,7 +27,7 @@ function merge(
   midIdx: number,
   endIdx: number,
   auxiliaryArray: number[],
-  animations: [number, number][]
+  animations: AnimationsArray
 ): void {
   let k = startIdx;
   let i = startIdx;
@@ -34,8 +35,8 @@ function merge(
 
   while (i <= midIdx && j <= endIdx) {
     // push values twice to toggle colour
-    animations.push([i, j]);
-    animations.push([i, j]);
+    animations.push([startIdx, endIdx, i, j]);
+    animations.push([startIdx, endIdx, i, j]);
     if (auxiliaryArray[i] <= auxiliaryArray[j]) {
       // push the index number and new value at that index
       animations.push([k, auxiliaryArray[i]]);
@@ -48,15 +49,15 @@ function merge(
 
   while (i <= midIdx) {
     // push twice to toggle colours
-    animations.push([i, i]);
-    animations.push([i, i]);
+    animations.push([startIdx, endIdx, i, i]);
+    animations.push([startIdx, endIdx, i, i]);
     animations.push([k, auxiliaryArray[i]]);
     arr[k++] = auxiliaryArray[i++];
   }
   while (j <= endIdx) {
     // push twice to toggle colours
-    animations.push([j, j]);
-    animations.push([j, j]);
+    animations.push([startIdx, endIdx, j, j]);
+    animations.push([startIdx, endIdx, j, j]);
     animations.push([k, auxiliaryArray[j]]);
     arr[k++] = auxiliaryArray[j++];
   }

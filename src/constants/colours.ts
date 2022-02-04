@@ -1,12 +1,13 @@
 type ColourInfo = {
   colour: string;
   hex: string;
+  light: string;
 };
 
 type ColourScheme = {
   primary: ColourInfo;
-  secondary: ColourInfo;
-  accent: ColourInfo;
+  secondary: Omit<ColourInfo, 'light'>;
+  accent: Omit<ColourInfo, 'light'>;
 };
 
 const THEME: ColourScheme = {
@@ -14,6 +15,7 @@ const THEME: ColourScheme = {
   // source: https://chakra-ui.com/docs/theming/theme#colors
   primary: {
     hex: '#9F7AEA',
+    light: '#B794F4',
     colour: 'purple',
   },
   secondary: {

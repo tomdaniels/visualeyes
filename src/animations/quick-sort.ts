@@ -1,47 +1,51 @@
-import { THEME, ANIMATION_SPEED_MS } from 'src/constants';
+import setPreviousStyles from './helpers/set-previous-styles';
+import { THEME, ANIMATION_SPEED_MS } from '../constants';
 import getQuickSortAnimations from '../algo/quick-sort';
+import animateCompletion from './helpers/animate-completion';
+import getArrayBars from '../utils/get-array-bars';
 
-export default function animateQuickSort(arr: number[], onCompletion: Function): void {
+export default function animateQuickSort(
+  arr: number[],
+  onCompletion: Function
+): void {
+  const arrayBars = getArrayBars(document);
   const animations = getQuickSortAnimations(arr);
 
-  const arrayBars = Array.from(
-    document.getElementsByClassName(
-      'array-bar'
-    ) as HTMLCollectionOf<HTMLElement>
-  );
   for (let i = 0; i < animations.length; i++) {
     if (i === animations.length - 1) {
       setTimeout(() => {
-        // animate completion
-        for (let i = 0; i < arr.length; i++) {
-          arrayBars[i].style.backgroundColor = THEME.primary.hex;
-        }
+        animateCompletion(arr, arrayBars);
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
+
     const isColourChange = i % 3 !== 2;
     if (isColourChange) {
-      const [pivotNodeIdx, swapNodeIdx, compareNodeIdx] =
+      const [startIdx, pivotNodeIdx, swapNodeIdx, compareNodeIdx] =
         animations[i];
+      const startNodeStyle = arrayBars[startIdx].style;
       const pivotNodeStyle = arrayBars[pivotNodeIdx].style;
       const swapNodeStyle = arrayBars[swapNodeIdx].style;
       const compareNodeStyle = arrayBars[compareNodeIdx].style;
-      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.hex;
+      const colour = i % 3 === 0 ? THEME.secondary.colour : THEME.primary.light;
       const previous = animations[i - 3];
       setTimeout(() => {
+        startNodeStyle.backgroundColor = THEME.accent.hex;
         pivotNodeStyle.backgroundColor = THEME.accent.hex;
         swapNodeStyle.backgroundColor = colour;
         compareNodeStyle.backgroundColor = colour;
-        if (!!previous && pivotNodeIdx !== previous[0]) {
-          const oldStartIdx = previous[0];
-          const oldStartNodeStyles = arrayBars[oldStartIdx].style;
-          oldStartNodeStyles.backgroundColor = THEME.primary.hex;
+        if (!!previous) {
+          setPreviousStyles({
+            previous,
+            startIdx,
+            endIdx: pivotNodeIdx,
+            colour: THEME.primary.light,
+          });
         }
       }, i * ANIMATION_SPEED_MS);
     } else {
       setTimeout(() => {
-        const [idx, xNewHeight, idj, jNewHeight] =
-          animations[i];
+        const [idx, xNewHeight, idj, jNewHeight] = animations[i];
         const barOneStyle = arrayBars[idx].style;
         const barTwoStyle = arrayBars[idj].style;
 
