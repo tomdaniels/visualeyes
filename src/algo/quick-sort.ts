@@ -21,19 +21,16 @@ function pivot(
   let pivot = arr[start];
   let swapIdx = start;
 
-  // animation helper.
-  const pivotIdx = end === arr.length - 1 ? swapIdx : end;
-
   for (let i = start + 1; i <= end; i++) {
     if (pivot > arr[i]) {
       swapIdx++;
-      animations.push([pivotIdx, swapIdx, i]);
-      animations.push([pivotIdx, swapIdx, i]);
+      animations.push([start, end, swapIdx, i]);
+      animations.push([start, end, swapIdx, i]);
       swap(arr, swapIdx, i, animations);
     }
   }
-  animations.push([pivotIdx, start, swapIdx]);
-  animations.push([pivotIdx, start, swapIdx]);
+  animations.push([start, end, start, swapIdx]);
+  animations.push([start, end, start, swapIdx]);
   swap(arr, start, swapIdx, animations);
   return swapIdx;
 }
