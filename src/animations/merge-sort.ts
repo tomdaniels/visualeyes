@@ -17,6 +17,7 @@ export default function animateMergeSort(
     if (i === animations.length - 1) {
       setTimeout(() => {
         arrayBars[0].style.backgroundColor = THEME.primary.hex;
+        arrayBars[arr.length - 1].style.backgroundColor = THEME.primary.hex;
         onCompletion();
       }, i * ANIMATION_SPEED_MS);
     }
