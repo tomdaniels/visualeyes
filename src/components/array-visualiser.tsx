@@ -7,11 +7,7 @@ import runAnimatedAlgorithm from '../animations';
 
 import * as styles from '../styles/array-visualiser.style';
 
-export default function ArrayVisualiser({
-  print,
-}: {
-  print?: string;
-}): ReactElement {
+function ArrayVisualiser({ print }: { print?: string }): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [status, setStatus] = useState<STATUS>(STATUS.CLEAN);
   const [array, setArray] = useState<number[]>([]);
@@ -93,3 +89,5 @@ export async function getStaticProps() {
     },
   };
 }
+
+export default ArrayVisualiser;
