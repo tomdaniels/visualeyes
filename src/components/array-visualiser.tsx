@@ -10,7 +10,7 @@ import * as styles from '../styles/array-visualiser.style';
 export default function ArrayVisualiser({
   print,
 }: {
-  print: string;
+  print?: string;
 }): ReactElement {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [status, setStatus] = useState<STATUS>(STATUS.CLEAN);
@@ -31,7 +31,7 @@ export default function ArrayVisualiser({
       }
       setArray(newArray);
     },
-    [numberOfBars, status]
+    [numberOfBars, status, print]
   );
 
   useEffect(() => {
