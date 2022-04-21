@@ -8,6 +8,7 @@ type ColourScheme = {
   primary: ColourInfo;
   secondary: Omit<ColourInfo, 'light'>;
   accent: Omit<ColourInfo, 'light'>;
+  ghost: Omit<ColourInfo, 'light'>
 };
 
 const THEME: ColourScheme = {
