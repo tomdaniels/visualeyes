@@ -26,6 +26,10 @@ const THEME: ColourScheme = {
     colour: 'yellow',
     hex: '#FEFCBF',
   },
+  ghost: {
+    colour: 'ghost',
+    hex: '#F8F8FF'
+  }
 };
 
 export default THEME;
